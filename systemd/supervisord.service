@@ -1,0 +1,12 @@
+[Unit]
+Description=Supervisor deamon
+After=network.target
+Documentation=http://supervisord.org
+
+[Service]
+Type=forking
+ExecStart=/usr/local/bin/supervisord -c /etc/supervisord.conf -d
+
+[Install]
+WantedBy=multi-user.target
+Alias=supervisord.service

@@ -1,0 +1,19 @@
+[Unit]
+Description=IP Changer Service
+Documentation=https://github.com/seevik2580/tor-ip-changer
+After=xvfb.target network.target nss-lookup.target
+
+[Service]
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+WorkingDirectory=/opt/tor
+ExecStart=env DISPLAY=:1 /opt/tor/ipchanger -m 10 -b -g
+Restart=on-failure
+RestartPreventExitStatus=23
+LimitNPROC=10000
+LimitNOFILE=1000000
+
+[Install]
+WantedBy=multi-user.target
